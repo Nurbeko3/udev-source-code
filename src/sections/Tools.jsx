@@ -1,24 +1,18 @@
 import React, { useState } from "react";
 import toolImages from "../assets/images/index";
 import ToolsCard from "../components/ToolsCard/ToolsCard";
-import Title from "../components/Title/Title";
 import { useTranslation } from "react-i18next";
 
 const tools = [
   {
     id: 1,
     name: "Prometheus",
-    category: "Backend",
+    category: "Devops",
     image: toolImages.Prometheus,
   },
-  { id: 2, name: "Loki", category: "Backend", image: toolImages.Loki },
-  {
-    id: 3,
-    name: "Bitbucket",
-    category: "Backend",
-    image: toolImages.Bitbucket,
-  },
-  { id: 4, name: "Gitlab", category: "Backend", image: toolImages.Gitlab },
+  { id: 2, name: "Loki", category: "Devops", image: toolImages.Loki },
+  { id: 3, name: "Bitbucket", category: "Devops", image: toolImages.Bitbucket },
+  { id: 4, name: "Gitlab", category: "Devops", image: toolImages.Gitlab },
   { id: 5, name: "Kotlin", category: "Mobile", image: toolImages.Kotlin },
   { id: 6, name: "Android", category: "Mobile", image: toolImages.Android },
   { id: 7, name: "Java", category: "Backend", image: toolImages.Java },
@@ -114,82 +108,73 @@ const tools = [
 
 const Tools = () => {
   const [sortedTools, setSortedTools] = useState(tools);
+  const [activeCategory, setActiveCategory] = useState(null);
   const { t } = useTranslation();
 
   const sortTools = (category) => {
     const sorted = tools.filter((tool) => tool.category === category);
     setSortedTools(sorted);
+    setActiveCategory(category);
   };
 
   const resetFilter = () => {
     setSortedTools(tools);
+    setActiveCategory(null);
   };
 
   return (
     <section className="bg-[#F4F7FF] pb-[100px]">
       <div className="container mx-auto p-4 md:p-8">
-      <h2
+        <h2
           className="pt-[60px] font-bold text-2xl md:text-4xl text-primary mb-4 md:mb-8 text-[#1B5BF7] text-[30px] md:text-[60px] pb-[20px] md:pb-[40px]"
           style={{ lineHeight: "1.2" }}
         >
           {t("tools.title")}
-
         </h2>
         <div className="filters pb-[50px] flex flex-wrap gap-2 justify-center md:justify-start">
           <button
-            className="outline-none cursor-pointer py-2 px-4 bg-white text-primary rounded-md"
+            className={`outline-none cursor-pointer py-2 px-4 ${
+              activeCategory === null
+                ? "bg-[#A8BFFF] text-white"
+                : "bg-white text-primary"
+            } rounded-md`}
             onClick={resetFilter}
           >
             {t("tools.all")}
           </button>
-          <button
-            className="outline-none cursor-pointer py-2 px-4 bg-white text-primary rounded-md"
-            onClick={() => sortTools("Frontend")}
-          >
-            {t("tools.frontend")}
-          </button>
-          <button
-            className="outline-none cursor-pointer py-2 px-4 bg-white text-primary rounded-md"
-            onClick={() => sortTools("Backend")}
-          >
-            {t("tools.backend")}
-          </button>
-          <button
-            className="outline-none cursor-pointer py-2 px-4 bg-white text-primary rounded-md"
-            onClick={() => sortTools("Devops")}
-          >
-            {t("tools.devops")}
-          </button>
-          <button
-            className="outline-none cursor-pointer py-2 px-4 bg-white text-primary rounded-md"
-            onClick={() => sortTools("Testing")}
-          >
-            {t("tools.testing")}
-          </button>
-          <button
-            className="outline-none cursor-pointer py-2 px-4 bg-white text-primary rounded-md"
-            onClick={() => sortTools("UX/UI")}
-          >
-            {t("tools.uxui")}
-          </button>
-          <button
-            className="outline-none cursor-pointer py-2 px-4 bg-white text-primary rounded-md"
-            onClick={() => sortTools("Infrastructure")}
-          >
-            {t("tools.infrastructure")}
-          </button>
-          <button
-            className="outline-none cursor-pointer py-2 px-4 bg-white text-primary rounded-md"
-            onClick={() => sortTools("Mobile")}
-          >
-            {t("tools.mobile")}
-          </button>
+          {[
+            "Frontend",
+            "Backend",
+            "Devops",
+            "Testing",
+            "UX/UI",
+            "Infrastructure",
+            "Mobile",
+          ].map((category) => (
+            <div onClick={() => sortTools(category)}>
+              <button
+                key={category}
+                className={`outline-none cursor-pointer py-2 px-4 ${
+                  activeCategory === category
+                    ? "bg-[#A8BFFF] text-white"
+                    : "bg-white text-primary"
+                } rounded-md`}
+                onClick={() => sortTools(category)}
+              >
+                {t(`tools.${category.toLowerCase()}`)}
+              </button>
+            </div>
+          ))}
         </div>
         <div className="tools-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {sortedTools.map((tool) => (
+          {tools.map((tool) => (
             <ToolsCard
               key={tool.id}
-              color={"#A8BFFF"}
+              color={
+                activeCategory === tool.category || activeCategory === null
+                  ? "#A8BFFF"
+                  : "white"
+              }
               img={tool.image}
               title={tool.name}
               height={100}
@@ -202,4 +187,3 @@ const Tools = () => {
 };
 
 export default Tools;
-
