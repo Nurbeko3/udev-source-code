@@ -1,0 +1,310 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Manrope";
+  src: url("./assets/fonts/Manrope-Medium.woff2") format("woff2"),
+    url("./assets/fonts/Manrope-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("./assets/fonts/Manrope-Light.woff2") format("woff2"),
+    url("./assets/fonts/Manrope-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("./assets/fonts/Manrope-Regular.woff2") format("woff2"),
+    url("./assets/fonts/Manrope-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("./assets/fonts/Manrope-SemiBold.woff2") format("woff2"),
+    url("./assets/fonts/Manrope-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("./assets/fonts/Manrope-Bold.woff2") format("woff2"),
+    url("./assets/fonts/Manrope-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("./assets/fonts/Manrope-ExtraLight.woff2") format("woff2"),
+    url("./assets/fonts/Manrope-ExtraLight.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("./assets/fonts/Manrope-ExtraBold.woff2") format("woff2"),
+    url("./assets/fonts/Manrope-ExtraBold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --container-width: 1170px;
+  --container-padding: 15px;
+
+  --primary: #1b5bf7;
+  --primary-disabled: #84a0e7;
+  --secondary: #464359;
+  --dark: #18191f;
+  --opacity: rgba(255, 60, 0, 0.5686274509803921);
+  --background: #f4f7ff;
+  --font-color: #464359;
+  --bg-secondary: #e0e8ff;
+  --devops: #a8bfff;
+  --mobile: #dbe5ff;
+  --infrastructure: #d1dde8;
+  --frontend: #c6d6ff;
+  --design: #ced6ee;
+  --pm: #99b7df;
+  --testing: #e1e9fe;
+  --backend: #bddaed;
+}
+
+#root {
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  font-family: Manrope, sans-serif;
+}
+
+.container {
+  max-width: 1170px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.site-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+  box-shadow: 0 1px 0 #e5e9f2;
+  z-index: 99;
+}
+
+.header-mobile-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+
+  width: 100%;
+  height: 100%;
+  
+  display: flex;
+  justify-content: space-between;
+
+  background-color: var(--background);
+  transition-duration: 500ms;
+}
+
+.header-mobile-wrapper.open {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  padding: 0px 20px;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: var(--background);
+  display: flex;
+  justify-content: space-between;
+
+  transition: left 0.3s ease-in-out;
+  transition-duration: 500ms;
+}
+
+.header__logo {
+  opacity: 100%;
+
+  transition: opacity 0.3s ease-in;
+
+  &:hover {
+    opacity: 80%;
+  }
+
+  &:active {
+    opacity: 70%;
+  }
+}
+
+.drop-down {
+  padding: 18px 0px;
+  margin-top: 13px;
+  margin-left: 26px;
+
+  display: none;
+
+  transition: all 0.3s ease-in;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.04), 0 4px 4px rgba(0, 0, 0, 0.08);
+}
+
+.drop-down__item {
+  transition: all 0.3s ease-in;
+
+  &:hover {
+    background-color: var(--primary);
+  }
+}
+
+.header__item:hover .drop-down {
+  display: block;
+}
+
+.drop-down__item:hover .drop-down-item__text {
+  color: #fff;
+}
+
+.drop-down-item__title {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.header__btn {
+  border: 2px solid transparent;
+  transition: all 0.3s ease-in;
+  &:hover {
+    background-color: transparent;
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  &:active {
+    position: relative;
+    top: 1px;
+  }
+}
+
+.card {
+  width: 330px;
+  height: 220px;
+}
+
+.app {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.filters button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.filters button:hover {
+  background-color: #0056b3;
+}
+
+.tools-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.tool-card {
+  width: 100px;
+  text-align: center;
+}
+
+.tool-image {
+  width: 100%;
+  height: auto;
+}
+
+.tool-name {
+  margin-top: 10px;
+  font-weight: bold;
+}
+.clients-carousel {
+  padding: 20px;
+}
+
+.clients-carousel .carousel-item {
+  padding: 0 10px;
+}
+
+.clients-carousel img {
+  width: 200px;
+  height: auto;
+  margin: auto;
+  display: block;
+}
+
+@keyframes typing {
+  0% {
+    width: 0;
+  }
+  40% {
+    width: 100%;
+  }
+  60% {
+    width: 100%;
+  } 
+  100% {
+    width: 0;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #1b5bf7;
+  }
+}
+
+.typing-animation {
+  overflow: hidden;
+  border-right: 0.15em solid #1b5bf7; 
+  white-space: nowrap;
+  animation: typing 10s steps(40, end) infinite,
+    blink-caret 0.75s step-end infinite;
+  width: 100%; 
+}
