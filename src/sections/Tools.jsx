@@ -135,9 +135,9 @@ const Tools = () => {
           <button
             className={`outline-none cursor-pointer py-2 px-4 ${
               activeCategory === null
-                ? "bg-[#A8BFFF] text-white"
+                ? "bg-[#0056B3] text-white"
                 : "bg-white text-primary"
-            } rounded-md`}
+            } rounded-md hover:bg-[#0056B3] hover:text-white`}
             onClick={resetFilter}
           >
             {t("tools.all")}
@@ -151,23 +151,24 @@ const Tools = () => {
             "Infrastructure",
             "Mobile",
           ].map((category) => (
-            <div onClick={() => sortTools(category)}>
-              <button
-                key={category}
-                className={`outline-none cursor-pointer py-2 px-4 ${
-                  activeCategory === category
-                    ? "bg-[#A8BFFF] text-white"
-                    : "bg-white text-primary"
-                } rounded-md`}
-                onClick={() => sortTools(category)}
-              >
-                {t(`tools.${category.toLowerCase()}`)}
-              </button>
-            </div>
+            <button
+              key={category}
+              className={`outline-none cursor-pointer py-2 px-4 ${
+                activeCategory === category
+                  ? "bg-[#0056B3] text-white"
+                  : "bg-white text-primary"
+              } rounded-md hover:bg-[#0056B3] hover:text-white`}
+              onClick={() => sortTools(category)}
+            >
+              {t(`tools.${category.toLowerCase()}`)}
+            </button>
           ))}
         </div>
+        <div className="pb-4 text-center text-xl text-[#1B5BF7] font-bold">
+          {activeCategory ? `${t(`tools.${activeCategory.toLowerCase()}`)}` : t("tools.all")}
+        </div>
         <div className="tools-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {tools.map((tool) => (
+          {sortedTools.map((tool) => (
             <ToolsCard
               key={tool.id}
               color={

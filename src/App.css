@@ -308,3 +308,7 @@ body {
     blink-caret 0.75s step-end infinite;
   width: 100%; 
 }
+
+.btn:active {   
+  background-color: #0056b3;
+}
