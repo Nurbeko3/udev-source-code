@@ -121,7 +121,7 @@ body {
 
   width: 100%;
   height: 100%;
-  
+
   display: flex;
   justify-content: space-between;
 
@@ -225,18 +225,38 @@ body {
 }
 
 .filters button {
-  margin: 0 10px;
-  padding: 10px 20px;
+  position: relative;
   border: none;
-  background-color: #007bff;
-  color: white;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s;
+}
+.real-radio {
+  z-index: -1;
+  opacity: 0;
 }
 
-.filters button:hover {
-  background-color: #0056b3;
+.real-radio:checked + .custom-radio::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.real-radio:not(:checked) + .custom-radio::before {
+  transform: translate(-50%, -50%) scale(0);
+}   
+
+.custom-radio {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 70%;
+    height: 70%;
+    background-color: var(--primary);
+    border-radius: 50%;
+    transition: transform 0.3s ease-in;
+  }
 }
 
 .tools-grid {
@@ -284,7 +304,7 @@ body {
   }
   60% {
     width: 100%;
-  } 
+  }
   100% {
     width: 0;
   }
@@ -302,13 +322,9 @@ body {
 
 .typing-animation {
   overflow: hidden;
-  border-right: 0.15em solid #1b5bf7; 
+  border-right: 0.15em solid #1b5bf7;
   white-space: nowrap;
   animation: typing 10s steps(40, end) infinite,
     blink-caret 0.75s step-end infinite;
-  width: 100%; 
-}
-
-.sort-btn:active {   
-  background-color: #0056b3;
+  width: 100%;
 }
